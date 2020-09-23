@@ -1,53 +1,41 @@
-$( function() {
-  $( "#datepicker" ).datepicker();
+$(function () {
+  $("#datepicker").datepicker();
 
-  $( "#slider1" ).slider({
+  $("#slider1").slider({
     range: "min",
     animate: "fast",
-    value:1000,
+    value: 1000,
     min: 1000,
     max: 3000000,
     step: 1,
-    slide: function( event, ui ) {
-      $( "#sum" ).val( "" + ui.value );
+    slide: function (event, ui) {
+      $("#sum").val("" + ui.value);
     }
   });
-  $( "#sum" ).val( "" + $( "#slider1" ).slider( "value" ) );
+  $("#sum").val("" + $("#slider1").slider("value"));
 
-  $( "#slider2" ).slider({
+  $("#slider2").slider({
     range: "min",
     animate: "fast",
-    value:1000,
+    value: 1000,
     min: 1000,
     max: 3000000,
     step: 1,
-    slide: function( event, ui ) {
-      $( "#refill-sum" ).val( "" + ui.value );
+    slide: function (event, ui) {
+      $("#refill-sum").val("" + ui.value);
     }
   });
-  $( "#refill-sum" ).val( "" + $( "#slider2" ).slider( "value" ) );
+  $("#refill-sum").val("" + $("#slider2").slider("value"));
 
-  $( "#calcButton" ).click(function( event ) {
+  $("#calcButton").click(function(event){
     event.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "calc.php"
+    })
+    // $('calcSum').html($result);
   });
 
-  $("#calcButton").click(
-    $.post(
-      'calc.php',
-      {
-          date: $('#datepicker').val(), 
-          sum: $('#sum').val(),
-          period: $('#period').val(),
-          refillNo: $('#refill-no').val(),
-          refillYes: $('#refill-yes').val(),
-          refillSum: $('#refill-sum').val(),
-      },
-      
-      function() { 
-          $('#calcForm').hide('slow');
-          $('#calcRslt').append("result");
-      }
-  ));
- 
 });
+
 
