@@ -1,3 +1,3 @@
 # echo_test
 
-https://kirizleev.github.io/echo_test/index.php
+https://kirizleev.github.io/echo_test/index.html
